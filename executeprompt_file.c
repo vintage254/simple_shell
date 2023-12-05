@@ -22,10 +22,17 @@ void exec_promt(const char *stringcommand)
 			perror("error in malloc");
 			exit(EXIT_FAILURE);
 		}
-		comargs[0] = (char *)stringcommand;
-		comargs[1] = NULL;
-		comargs[2] = NULL;
+		/*splitting the command line into arguments */
 
+		tokens (stringcommand, comargs);
+		/*handle path */
+		handle_path(comargs[0], comargs);
+		if (execvp(comargs[0], comargs) == -1)
+		{
+			perror("error in execvp");
+			free(comargs);
+			exit(EXIT_FAILURE);
+		}
 		if (execve (stringcommand,comargs, envp) == -1)
 		{
 			perror("error in execve");

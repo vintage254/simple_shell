@@ -5,5 +5,9 @@
  */
 void letsprint (const char *commandline)
 {
-	write(STDOUT_FILENO, commandline, strlen(commandline));
+	if (write(STDOUT_FILENO, commandline, strlen(commandline)) == -1)
+	{
+		perror ("error");
+		exit(EXIT_FAILURE);
+	}
 }
