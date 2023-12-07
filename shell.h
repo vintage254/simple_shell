@@ -44,4 +44,5 @@ void tokens(const char *commandline, char **args);
 void handle_path(const char *command, char **comargs);
 int validnumber(char *s);
 void forExit(par_t *pars);
+void forEnv(void);
 #endif
