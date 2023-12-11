@@ -47,5 +47,6 @@ int validnumber(char *s);
 void forExit(par_t *pars);
 void forEnv(void);
 ssize_t getline_func(char *user_input, size_t x);
+void tokens_(const char *commandline, char **args);
 
 #endif
