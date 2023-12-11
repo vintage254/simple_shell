@@ -1,6 +1,7 @@
 #ifndef SHELL_H
 #define SHELL_H
 
+#define BUFFER_SIZE 1024
 #include <stddef.h>
 #include <unistd.h>
 #include <string.h>
@@ -45,4 +46,6 @@ void handle_path(const char *command, char **comargs);
 int validnumber(char *s);
 void forExit(par_t *pars);
 void forEnv(void);
+ssize_t getline_func(char *user_input, size_t x);
+
 #endif
