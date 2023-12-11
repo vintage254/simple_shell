@@ -6,7 +6,6 @@
 void exec_promt(const char *stringcommand)
 {
 	pid_t childprocess = fork();
-	char *envp[] = {NULL};
 
 	if (childprocess == -1)
 	{
@@ -25,6 +24,13 @@ void exec_promt(const char *stringcommand)
 		/*splitting the command line into arguments */
 
 		tokens (stringcommand, comargs);
+		/* Handle the "exit" command separately */
+		if (strcmp(comargs[0], "exit") == 0)
+		{
+			forExit(NULL);  /* You might need to pass a par_t structure if needed*/
+			free(comargs);  /* Free allocated memory*/
+			exit(EXIT_SUCCESS);  /* Make sure to exit the child process*/
+		}
 		/*handle path */
 		handle_path(comargs[0], comargs);
 		if (execvp(comargs[0], comargs) == -1)
@@ -33,13 +39,6 @@ void exec_promt(const char *stringcommand)
 			free(comargs);
 			exit(EXIT_FAILURE);
 		}
-		if (execve (stringcommand,comargs, envp) == -1)
-		{
-			perror("error in execve");
-			free (comargs);
-			exit (EXIT_FAILURE);
-		}
-		free(comargs);/*Free allocated memory after execve (should not reach here)*/
 	}
 	else 
 	{

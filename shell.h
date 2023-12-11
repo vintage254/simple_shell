@@ -37,6 +37,7 @@ typedef struct op
 } op_t;
 
 void letsprint (const char *commandline);
+void letsprint_int(int num);
 void allsmiles(void);
 void exec_promt(const char *stringcommand);
 int main(void);
