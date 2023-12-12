@@ -5,6 +5,8 @@
  */
 void exec_promt(const char *stringcommand)
 {
+	extern char **environ;
+
 	pid_t childprocess = fork();
 
 	if (childprocess == -1)
@@ -33,9 +35,9 @@ void exec_promt(const char *stringcommand)
 		}
 		/*handle path */
 		handle_path(comargs[0], comargs);
-		if (execvp(comargs[0], comargs) == -1)
+		if (execve(comargs[0], comargs, environ) == -1)
 		{
-			perror("error in execvp");
+			perror("error in execve");
 			free(comargs);
 			exit(EXIT_FAILURE);
 		}
@@ -47,7 +49,11 @@ void exec_promt(const char *stringcommand)
 
 		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 		{
-			fprintf(stderr, "./shell: Comand failed %d\n",WEXITSTATUS(status));
+			fprintf(stderr, "%s: Command not found\n", stringcommand);
+		}
+		else
+		{
+			perror("Error in child process");
 		}
 	}
 }
