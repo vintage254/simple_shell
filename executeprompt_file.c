@@ -42,6 +42,12 @@ void exec_promt(const char *stringcommand)
 	}
 	else 
 	{
-		wait (NULL);
+		int status;
+		waitpid (childprocess, &status, 0);
+
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+		{
+			fprintf(stderr, "./shell: Comand failed %d\n",WEXITSTATUS(status));
+		}
 	}
 }
