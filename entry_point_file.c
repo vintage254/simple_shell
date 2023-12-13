@@ -7,20 +7,27 @@
  */
 int main(void)
 {
-	char comm[300];
+	char *input_buffer = NULL;
+	size_t buffer_size = 0;
 	ssize_t chars_read;
 
 	while (1)
 	{
-		allsmiles();
-		chars_read = getline_func(comm, sizeof(comm));
+		printf("#cisfun$ ");
+		chars_read = getline_func(input_buffer, buffer_size);
+
 		if (chars_read == -1)
 		{
 			/* End of file reached (Ctrl+D), exit the shell*/
-			exit(EXIT_SUCCESS);
+			printf("\n");
+			break;
 		}
-		read_user_input(comm, sizeof(comm));
-		exec_promt(comm);
+
+		input_buffer[strcspn(input_buffer, "\n")] = ('\0');
+
+		exec_promt(input_buffer);
 	}
+
+	free(input_buffer);
 	return (0);
 }
