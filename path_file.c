@@ -56,8 +56,11 @@ void handle_path(const char *command, char **comargs)
 				free(full_path);
 				return;
 			}
-			free(full_path);
-			token = strtok(NULL, ":");
+			while (token != NULL)
+			{
+				free(full_path);
+				token = strtok(NULL, ":");
+			}
 		}
 		/*If the loop completes, the command was not found in PATH*/
 		letsprint("Command not found in PATH: ");
