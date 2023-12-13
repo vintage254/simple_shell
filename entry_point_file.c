@@ -11,6 +11,9 @@ int main(void)
 	size_t buffer_size = 0;
 	ssize_t chars_read;
 
+	par_t pars;
+	pars.argv = NULL;
+
 	while (1)
 	{
 		printf("#cisfun$ ");
@@ -25,7 +28,7 @@ int main(void)
 
 		input_buffer[strcspn(input_buffer, "\n")] = ('\0');
 
-		exec_promt(input_buffer);
+		exec_prompt(input_buffer, &pars);
 	}
 
 	free(input_buffer);

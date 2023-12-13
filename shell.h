@@ -10,6 +10,11 @@
 #include <stdbool.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+typedef struct alias {
+    char *name;
+    char *value;
+    struct alias *next;
+} alias_t;
 /**
  * struct pars - structure used to hold all shell variables needed
  * @argv: command line argument from main function
@@ -23,6 +28,7 @@ typedef struct pars
         char **argv;
         char **args;
         int stats;
+	alias_t *aliases;
 } par_t;
 
 /**
@@ -36,8 +42,9 @@ typedef struct op
         void (*func)(par_t *);
 } op_t;
 extern char **environ;
-void exec_prompt(const char *stringcommand);
-void exec_child(const char *stringcommand);
+
+void exec_prompt(const char *stringcommand, par_t *pars);
+void exec_child(const char *stringcommand, par_t *pars);
 void exec_parent(pid_t childprocess);
 void letsprint (const char *commandline);
 void letsprint_int(int num);
@@ -53,4 +60,13 @@ void forEnv(void);
 ssize_t getline_func(char *user_input, size_t x);
 void tokens_(const char *commandline, char **args);
 
+void setEnv(par_t *pars);
+void unsetEnv(par_t *pars);
+void cd(par_t *pars);
+
+void replace_variables(char **args, const par_t *pars);
+void add_alias(par_t *pars, const char *name, const char *value);
+void print_aliases(const par_t *pars);
+char *resolve_alias(const par_t *pars, const char *name);
+alias_t *find_alias(const par_t *pars, const char *name);
 #endif
