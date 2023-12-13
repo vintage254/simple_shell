@@ -35,7 +35,10 @@ typedef struct op
         char *name;
         void (*func)(par_t *);
 } op_t;
-
+extern char **environ;
+void exec_prompt(const char *stringcommand);
+void exec_child(const char *stringcommand);
+void exec_parent(pid_t childprocess);
 void letsprint (const char *commandline);
 void letsprint_int(int num);
 void allsmiles(void);
