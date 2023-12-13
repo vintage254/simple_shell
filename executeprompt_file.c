@@ -1,4 +1,5 @@
 #include "shell.h"
+#include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
 void replace_variables(char **args, const par_t *pars)
@@ -116,7 +117,7 @@ void exec_child(const char *stringcommand, par_t *pars )
 {
 	/*Dynamically allocate memory for comargs*/
 	char *comargs[2];
-	comargs[0] = (char *)stringcommand;
+	comargs[0] = strdup(stringcommand);
 	comargs[1] = NULL;
 
 	/* Handle the "exit" command separately */
@@ -151,6 +152,8 @@ void exec_child(const char *stringcommand, par_t *pars )
 		perror("error in child process execve");
 		exit(EXIT_FAILURE);
 	}
+	
+	free(comargs[0]);
 }
 /**
  * exec_parent - Waits for the child process to complete and handles the status

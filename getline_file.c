@@ -9,12 +9,14 @@
 ssize_t getline_func(char *user_input, size_t x)
 {
 	static char buffer[BUFFER_SIZE];
-	static size_t buffer_index = 0;
-	static ssize_t chars_in_buffer = 0;
+	static size_t buffer_index;
+	static ssize_t chars_in_buffer;
 	ssize_t chars_read = 0;
-	
+
+	buffer_index = 0;
+	chars_in_buffer = 0;
+
 	/* Refill the buffer if it's empty*/
-	
 	if (buffer_index >= (size_t)chars_in_buffer || buffer_index == 0)
 	{
 		chars_in_buffer = read(STDIN_FILENO, buffer, BUFFER_SIZE);
@@ -26,12 +28,14 @@ ssize_t getline_func(char *user_input, size_t x)
 		if (chars_in_buffer == 0)
 		{
 			/* End of file reached*/
-			return -1;
+			return (-1);
 		}
 		buffer_index = 0;
 	}
-	/* Copy characters from the buffer to user_input until newline or buffer ends*/
-	while (buffer_index < (size_t)chars_in_buffer && chars_read < (ssize_t)x - 1 && buffer[buffer_index] != '\n')
+/* Copy characters from buffer to user_input until newline or buffer ends*/
+	while (buffer_index < (size_t)chars_in_buffer &&
+			chars_read < (ssize_t)(x - 1) &&
+			buffer[buffer_index] != '\n')
 	{
 		user_input[chars_read++] = buffer[buffer_index++];
 	}
@@ -39,5 +43,5 @@ ssize_t getline_func(char *user_input, size_t x)
 	user_input[chars_read] = '\0';
 	/* Move to the next character in the buffer*/
 	buffer_index++;
-	return chars_read;
+	return (chars_read);
 }

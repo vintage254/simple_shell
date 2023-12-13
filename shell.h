@@ -63,7 +63,7 @@ void tokens_(const char *commandline, char **args);
 void setEnv(par_t *pars);
 void unsetEnv(par_t *pars);
 void cd(par_t *pars);
-
+void free_shell(par_t *shell);
 void replace_variables(char **args, const par_t *pars);
 void add_alias(par_t *pars, const char *name, const char *value);
 void print_aliases(const par_t *pars);

@@ -14,7 +14,6 @@ void forExit(par_t *pars)
 	{
 		stats = atoi(pars->args[1]);
 	}
-	
 	letsprint("Exiting shell with status ");
 	letsprint_int(stats);
 	letsprint("\n");

@@ -8,24 +8,23 @@
 int main(void)
 {
 	char *input_buffer = NULL;
-	size_t buffer_size = 0;
 	ssize_t chars_read;
 
 	par_t pars;
-	pars.argv = NULL;
+
+	pars.argv = (NULL);
 
 	while (1)
 	{
 		letsprint("#cisfun$ ");
-		/* Allocate memory for input_buffer before calling getline_func*/
-		input_buffer = (char *)malloc(buffer_size);
-		
+		input_buffer = (char *)malloc(BUFFER_SIZE);
+
 		if (input_buffer == NULL)
 		{
 			perror("Error in malloc");
 			exit(EXIT_FAILURE);
 		}
-		chars_read = getline_func(input_buffer, buffer_size);
+		chars_read = getline_func(input_buffer, BUFFER_SIZE);
 
 		if (chars_read == -1)
 		{
@@ -33,11 +32,10 @@ int main(void)
 			letsprint("\n");
 			break;
 		}
-
 		input_buffer[strcspn(input_buffer, "\n")] = ('\0');
 
 		exec_prompt(input_buffer, &pars);
-		free(input_buffer);
 	}
+	free(input_buffer);
 	return (0);
 }
