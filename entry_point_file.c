@@ -16,13 +16,21 @@ int main(void)
 
 	while (1)
 	{
-		printf("#cisfun$ ");
+		letsprint("#cisfun$ ");
+		/* Allocate memory for input_buffer before calling getline_func*/
+		input_buffer = (char *)malloc(buffer_size);
+		
+		if (input_buffer == NULL)
+		{
+			perror("Error in malloc");
+			exit(EXIT_FAILURE);
+		}
 		chars_read = getline_func(input_buffer, buffer_size);
 
 		if (chars_read == -1)
 		{
 			/* End of file reached (Ctrl+D), exit the shell*/
-			printf("\n");
+			letsprint("\n");
 			break;
 		}
 
