@@ -37,8 +37,7 @@ int main(void)
 		input_buffer[strcspn(input_buffer, "\n")] = ('\0');
 
 		exec_prompt(input_buffer, &pars);
+		free(input_buffer);
 	}
-
-	free(input_buffer);
 	return (0);
 }

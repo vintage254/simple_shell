@@ -11,7 +11,10 @@ void replace_variables(char **args, const par_t *pars)
                 {
                         char status_str[20];
                         snprintf(status_str, sizeof(status_str), "%d", pars->stats);
-                        free(args[i]);
+			if (args[i] != NULL)
+			{
+				free(args[i]);
+			}
                         args[i] = strdup(status_str);
                 }
                 /* Handle $$ variable*/
@@ -44,8 +47,8 @@ void add_alias(par_t *pars, const char *name, const char *value)
                         exit(EXIT_FAILURE);
                 }
                 /* Set the name and value for the new alias*/
-                new_alias->name = strdup(name);
-                new_alias->value = strdup(value);
+                new_alias->name = (name != NULL) ? strdup(name) : NULL;
+                new_alias->value = (value != NULL) ? strdup(value) : NULL;
                 /* Add the new alias to the aliases array*/
                 new_alias->next = pars->aliases;
                 pars->aliases = new_alias;
