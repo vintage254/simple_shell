@@ -1,4 +1,8 @@
 #include "shell.h"
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 /**
  * construct_full_path - construct the full path to the executable.
  * @token: The current token from PATH.
@@ -35,7 +39,7 @@ static void execute_command(char **comargs, const char *full_path)
 		exit(EXIT_FAILURE);
 	}
 
-	free(full_path);
+	free((void *)full_path);
 }
 /**
  * search_in_path - Search for the executable in a specific PATH directory.
