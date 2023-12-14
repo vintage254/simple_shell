@@ -5,7 +5,6 @@
 
 void forEnv(void)
 {
-	char **environ;
 	char **env = environ;
 
 	while (*env)
