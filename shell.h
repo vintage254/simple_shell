@@ -37,6 +37,7 @@ typedef struct alias
  * @argv: command line argument from main function
  * @args: array of arguments
  * @stats: run command return status
+ * @aliases: pointer to a linked list of aliases
  * Description: Structures hold the variables that passed to
  * other functions.
  */
