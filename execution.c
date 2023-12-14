@@ -70,13 +70,15 @@ void exec_child(const char *stringcommand, par_t *pars)
 	/*handle path */
 	handle_path(comargs[0], comargs);
 
-	free(comargs[0]);
-
 	if (execve(comargs[0], comargs, environ) == -1)
 	{
 		perror("error in child process execve");
 		exit(EXIT_FAILURE);
 	}
+
+	perror("execve failed");
+	free(comargs[0]);
+	exit(EXIT_FAILURE);
 }
 /**
  * exec_parent - Waits for the child process to complete, handles the status.

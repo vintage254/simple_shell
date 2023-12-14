@@ -23,8 +23,6 @@ static char *construct_full_path(const char *token, const char *command)
 	strcat(full_path, "/");
 	strcat(full_path, command);
 
-	free(full_path);
-
 	return (full_path);
 }
 /**
