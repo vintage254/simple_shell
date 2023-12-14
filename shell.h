@@ -10,24 +10,37 @@
 #include <stdbool.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-typedef struct alias {
-    char *name;
-    char *value;
-    struct alias *next;
+/**
+ * struct alias - A structure to represent an alias in the shell
+ * @name: The name of the alias
+ * @value: The value associated with the alias
+ * @next: Pointer to the next alias in the linked list
+ *
+ * Description: This structure is used to represent an alias in the shell.
+ * It includes the name, which is the alias itself, the value, which is
+ * the command or string the alias represents, and a pointer to the next
+ * alias in the linked list.
+ */
+typedef struct alias
+{
+	char *name;
+	char *value;
+	struct alias *next;
 } alias_t;
 /**
  * struct pars - structure used to hold all shell variables needed
  * @argv: command line argument from main function
  * @args: array of arguments
  * @stats: run command return status
+ * @aliases: Linked list of aliases
  * Description: Structures hold the variables that passed to
  * other functions.
  */
 typedef struct pars
 {
-        char **argv;
-        char **args;
-        int stats;
+	char **argv;
+	char **args;
+	int stats;
 	alias_t *aliases;
 } par_t;
 
@@ -38,8 +51,8 @@ typedef struct pars
  */
 typedef struct op
 {
-        char *name;
-        void (*func)(par_t *);
+	char *name;
+	void (*func)(par_t *);
 } op_t;
 extern char **environ;
 
