@@ -10,12 +10,6 @@
 #include <stdbool.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-/**
- * struct alias - Represents an alias in the shell
- * @name: The name of the alias
- * @value: The value or command associated with the alias
- * @next: Pointer to the next alias in the linked list
- */
 typedef struct alias
 {
 	char *name;
@@ -27,7 +21,6 @@ typedef struct alias
  * @argv: command line argument from main function
  * @args: array of arguments
  * @stats: run command return status
- * @aliases: Linked list of aliases
  * Description: Structures hold the variables that passed to
  * other functions.
  */
@@ -80,5 +73,8 @@ alias_t *find_alias(const par_t *pars, const char *name);
 void exec_prompt(const char *stringcommand, par_t *pars);
 void exec_child(const char *stringcommand, par_t *pars);
 void exec_parent(pid_t childprocess);
+int handle_builtin_commands(char **comargs, par_t *pars);
+void handle_path_and_execute(char *comargs[2]);
+void execute_command(char **comargs);
 
 #endif

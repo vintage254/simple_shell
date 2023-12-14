@@ -32,17 +32,16 @@ static char *construct_full_path(const char *token, const char *command)
  * @comargs: An array to store the resulting tokens for execution.
  * @full_path: The full path to the executable.
  */
-static void execute_command(char **comargs, const char *full_path)
+void execute_command(char **comargs)
 {
-	comargs[0] = strdup(full_path);
-	if (comargs[0] == NULL)
+	if (execvp(comargs[0], comargs) == -1)
 	{
-		perror("error in strdup");
+		perror("execvp failed");
 		exit(EXIT_FAILURE);
 	}
 
-	free((void *)full_path);
-	return;
+	perror("execvp failed");
+	exit(EXIT_FAILURE);
 }
 /**
  * search_in_path - Search for the executable in a specific PATH directory.
@@ -62,7 +61,8 @@ static int search_in_path(const char *token,
 		S_ISREG(file_stat.st_mode) &&
 		(file_stat.st_mode & S_IXUSR))
 	{
-		execute_command(comargs, full_path);
+		execute_command(comargs);
+		free(full_path);
 		return (1);
 	}
 

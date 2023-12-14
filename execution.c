@@ -40,66 +40,63 @@ void exec_child(const char *stringcommand, par_t *pars)
 	comargs[1] = NULL;
 
 	/* Handle the "exit" command separately */
-	if (strcmp(comargs[0], "exit") == 0)
+	if (handle_builtin_commands(comargs, pars) == 1)
 	{
-		forExit(pars);
 		free(comargs[0]);
 		exit(EXIT_SUCCESS);
 	}
-	/* Handle the "setenv" command */
-	else if (strcmp(comargs[0], "setenv") == 0)
-	{
-		setEnv(pars);
-		free(comargs[0]);
-		exit(EXIT_SUCCESS);
-	}
-	/* Handle the "unsetenv" command */
-	else if (strcmp(comargs[0], "unsetenv") == 0)
-	{
-		unsetEnv(pars);
-		free(comargs[0]);
-		exit(EXIT_SUCCESS);
-	}
-	/* Handle the "cd" command */
-	else if (strcmp(comargs[0], "cd") == 0)
-	{
-		cd(pars);
-		free(comargs[0]);
-		exit(EXIT_SUCCESS);
-	}
-	/*handle path */
-	handle_path(comargs[0], comargs);
+
+	handle_path_and_execute(comargs);
 
 	free(comargs[0]);
+}
+
+/**
+ * handle_builtin_commands - Handles built-in command
+ *
+ * @command: The command to be executed.
+ * @pars: Parameters including the command line arguments.
+ */
+int handle_builtin_commands(char **command, par_t *pars)
+{
+	if (strcmp(command[0], "exit") == 0)
+	{
+		forExit(pars);
+	}
+	/* Handle the "setenv" command */
+	else if (strcmp(command[0], "setenv") == 0)
+	{
+		setEnv(pars);
+	}
+	/* Handle the "unsetenv" command */
+	else if (strcmp(command[0], "unsetenv") == 0)
+	{
+		unsetEnv(pars);
+	}
+	/* Handle the "cd" command */
+	else if (strcmp(command[0], "cd") == 0)
+	{
+		cd(pars);
+	}
+	else
+	{
+		execute_command(command);
+	}
+	return (0);
+}
+/**
+ * handle_path_and_execute - Handles path and executes command using execve
+ *
+ * @comargs: An array containing the command and its arguments.
+ */
+void handle_path_and_execute(char *comargs[2])
+{
+	/*handle path */
+	handle_path(comargs[0], comargs);
 
 	if (execve(comargs[0], comargs, environ) == -1)
 	{
 		perror("error in child process execve");
 		exit(EXIT_FAILURE);
-	}
-}
-/**
- * exec_parent - Waits for the child process to complete, handles the status.
- * @childprocess: The process ID of the child process.
- *
- * This function waits for the child process specified by 'childprocess' to
- * complete its execution. It then examines the status of the child process and
- * prints an error message if the child process did not exit successfully.
- *
- * @childprocess: The process ID of the child process to wait for.
- */
-void exec_parent(pid_t childprocess)
-{
-	int status;
-
-	waitpid(childprocess, &status, 0);
-
-	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-	{
-		fprintf(stderr, "Command not found\n");
-	}
-	else
-	{
-		perror("Error in child process");
 	}
 }
