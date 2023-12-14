@@ -1,4 +1,6 @@
 #include "shell.h"
+#include <unistd.h>
+
 /**
  * forEnv - builtin function to print current env
   */
