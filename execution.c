@@ -95,13 +95,20 @@ void exec_parent(pid_t childprocess)
 	int status;
 
 	waitpid(childprocess, &status, 0);
-
-	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+	
+	if (WIFEXITED(status))
 	{
-		fprintf(stderr, "Command not found\n");
+		if (WEXITSTATUS(status) != 0)
+		{
+			fprintf(stderr, "Command not found\n");
+		}
 	}
 	else
 	{
 		perror("Error in child process");
+	}
+	if (WIFEXITED(status))
+	{
+		printf("Child process exited with status: %d\n", WEXITSTATUS(status));
 	}
 }
