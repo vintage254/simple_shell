@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
- * tockens - Tokenizes a command line string into an array of strings.
+ * tokens - Tokenizes a command line string into an array of strings.
  * @commandline: The command line string to be tokenized.
  * @args: The array to store the resulting tokens.
  */
