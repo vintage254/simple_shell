@@ -1,11 +1,12 @@
 #include "shell.h"
+#include <unistd.h>
+
 /**
  * forEnv - builtin function to print current env
   */
 
 void forEnv(void)
 {
-	char **environ;
 	char **env = environ;
 
 	while (*env)
