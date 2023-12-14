@@ -1,0 +1,30 @@
+#cisfun$ Executing command: [A[B
+execvp failed: No such file or directory
+non-zero exit: 1
+#cisfun$ Executing command: ls
+alias.c
+AUTHORS
+debug_output.txt
+entry_point_file.c
+environment.c
+exec_parent.c
+execution.c
+exit_file.c
+forEnv.c
+free_par.c
+getline_file.c
+hsh
+output.txt
+path_file.c
+print_file.c
+promptshow_file.c
+README.md
+readuserinput_file.c
+shell.h
+tockenization_file.c
+tokens.c
+vgcore.3021
+#cisfun$ Executing command: ls -l
+execvp failed: No such file or directory
+non-zero exit: 1
+#cisfun$ 

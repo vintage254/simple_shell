@@ -93,5 +93,6 @@ void exec_parent(pid_t childprocess);
 int handle_builtin_commands(char **comargs, par_t *pars);
 void handle_path_and_execute(char *comargs[2]);
 void execute_command(char **comargs);
+char *create_full_path(const char *directory, const char *command);
 
 #endif
