@@ -40,6 +40,7 @@ static void execute_command(char **comargs, const char *full_path)
 	}
 
 	free((void *)full_path);
+	return;
 }
 /**
  * search_in_path - Search for the executable in a specific PATH directory.
