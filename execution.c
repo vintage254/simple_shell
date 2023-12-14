@@ -43,24 +43,28 @@ void exec_child(const char *stringcommand, par_t *pars)
 	if (strcmp(comargs[0], "exit") == 0)
 	{
 		forExit(pars);
+		free(comargs[0]);
 		exit(EXIT_SUCCESS);
 	}
 	/* Handle the "setenv" command */
 	else if (strcmp(comargs[0], "setenv") == 0)
 	{
 		setEnv(pars);
+		free(comargs[0]);
 		exit(EXIT_SUCCESS);
 	}
 	/* Handle the "unsetenv" command */
 	else if (strcmp(comargs[0], "unsetenv") == 0)
 	{
 		unsetEnv(pars);
+		free(comargs[0]);
 		exit(EXIT_SUCCESS);
 	}
 	/* Handle the "cd" command */
 	else if (strcmp(comargs[0], "cd") == 0)
 	{
 		cd(pars);
+		free(comargs[0]);
 		exit(EXIT_SUCCESS);
 	}
 	/*handle path */
