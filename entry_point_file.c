@@ -11,8 +11,7 @@ int main(void)
 	ssize_t chars_read;
 
 	par_t pars;
-
-	pars.argv = (NULL);
+	pars.argv = NULL;
 
 	while (1)
 	{
@@ -32,7 +31,7 @@ int main(void)
 			letsprint("\n");
 			break;
 		}
-		input_buffer[strcspn(input_buffer, "\n")] = ('\0');
+		input_buffer[strcspn(input_buffer, "\n")] = '\0';
 
 		exec_prompt(input_buffer, &pars);
 
