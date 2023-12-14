@@ -28,7 +28,6 @@ static char *construct_full_path(const char *token, const char *command)
 /**
  * execute_command - Execute the command using execvp.
  * @comargs: An array to store the resulting tokens for execution.
- * @full_path: The full path to the executable.
  */
 void execute_command(char **comargs)
 {

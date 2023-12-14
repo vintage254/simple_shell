@@ -56,6 +56,8 @@ void exec_child(const char *stringcommand, par_t *pars)
  *
  * @command: The command to be executed.
  * @pars: Parameters including the command line arguments.
+ *
+ * Return: 0 on success, -1 on failure.
  */
 int handle_builtin_commands(char **command, par_t *pars)
 {
