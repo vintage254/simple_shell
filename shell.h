@@ -20,6 +20,10 @@
  * It includes the name, which is the alias itself, the value, which is
  * the command or string the alias represents, and a pointer to the next
  * alias in the linked list.
+ * struct alias - Represents an alias in the shell
+ * @name: The name of the alias
+ * @value: The value or command associated with the alias
+ * @next: Pointer to the next alias in the linked list
  */
 typedef struct alias
 {
