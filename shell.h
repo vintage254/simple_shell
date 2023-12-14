@@ -10,6 +10,24 @@
 #include <stdbool.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+<<<<<<< HEAD
+=======
+/**
+ * struct alias - A structure to represent an alias in the shell
+ * @name: The name of the alias
+ * @value: The value associated with the alias
+ * @next: Pointer to the next alias in the linked list
+ *
+ * Description: This structure is used to represent an alias in the shell.
+ * It includes the name, which is the alias itself, the value, which is
+ * the command or string the alias represents, and a pointer to the next
+ * alias in the linked list.
+ * struct alias - Represents an alias in the shell
+ * @name: The name of the alias
+ * @value: The value or command associated with the alias
+ * @next: Pointer to the next alias in the linked list
+ */
+>>>>>>> 4da7cea8ed2301bd350d3062dbcb565e6b729d50
 typedef struct alias
 {
 	char *name;

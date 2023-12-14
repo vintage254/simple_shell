@@ -96,7 +96,8 @@ void handle_path_and_execute(char *comargs[2])
 
 	if (execve(comargs[0], comargs, environ) == -1)
 	{
-		perror("error in child process execve");
+		perror("execve failed");
+		free(comargs[0]);
 		exit(EXIT_FAILURE);
 	}
 }
