@@ -54,17 +54,13 @@ void add_alias(par_t *pars, const char *name, const char *value)
 		new_alias->name = (name != NULL) ? strdup(name) : NULL;
 		new_alias->value = (value != NULL) ? strdup(value) : NULL;
 		/* Check if strdup failed for name or value */
-		
-		if ((name != NULL && new_alias->name == NULL) 
+		if ((name != NULL && new_alias->name == NULL)
 				|| (value != NULL && new_alias->value == NULL))
 		{
 			perror("Error in strdup");
-			free(new_alias->name);  
-			/* Free the allocated memory for name*/
-			free(new_alias->value); 
-			/* Free the allocated memory for value*/
-			free(new_alias);
-			/* Free the allocated memory for the new_alias structure*/
+			free(new_alias->name);/* Free the allocated memory for name*/
+			free(new_alias->value);/* Free the allocated memory for value*/
+			free(new_alias);/* Free the allocated memory for the new_alias structure*/
 			exit(EXIT_FAILURE);
 		}
 		/* Add the new alias to the aliases array*/
