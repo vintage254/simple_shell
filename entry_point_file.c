@@ -1,4 +1,40 @@
 #include "shell.h"
+/**
+ * prompt - Execute the user input.
+ *
+ * @input: User input.
+ * @pars: Pointer to the par_t structure.
+ *
+ * Return: 0 on success, -1 on failure.
+ */
+int prompt(char *input, par_t *pars)
+{
+	pid_t pid;
+	int status;
+	char *full_path;
+
+	full_path = input;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		if (execve(full_path, pars->argv, environ) == -1)
+		{
+			perror(input);
+			_exit(EXIT_FAILURE);
+		}
+	}
+	else if(pid < 0)
+	{
+		perror("Fork failed");
+		return (-1);
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+	}
+	return (0);
+}
 
 /**
  * main - Entry point of the shell program

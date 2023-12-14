@@ -61,6 +61,7 @@ typedef struct op
 } op_t;
 extern char **environ;
 
+int prompt(char *input, par_t *pars);
 void exec_prompt(const char *stringcommand, par_t *pars);
 void exec_child(const char *stringcommand, par_t *pars);
 void exec_parent(pid_t childprocess);
