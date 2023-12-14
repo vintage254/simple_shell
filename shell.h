@@ -69,4 +69,8 @@ void add_alias(par_t *pars, const char *name, const char *value);
 void print_aliases(const par_t *pars);
 char *resolve_alias(const par_t *pars, const char *name);
 alias_t *find_alias(const par_t *pars, const char *name);
+void exec_prompt(const char *stringcommand, par_t *pars);
+void exec_child(const char *stringcommand, par_t *pars);
+void exec_parent(pid_t childprocess);
+
 #endif

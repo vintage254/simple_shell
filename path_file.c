@@ -1,21 +1,85 @@
 #include "shell.h"
 /**
- * handle_path - Search for the executable in directories specified by PATH
- * @command: The command to be executed
- * @comargs: An array to store the resulting tokens for execution
+ * construct_full_path - construct the full path to the executable.
+ * @token: The current token from PATH.
+ * @command: The command to be executed.
+ * Return: The dynamically allocated full path.
+ */
+static char *construct_full_path(const char *token, const char *command)
+{
+	char *full_path = malloc(strlen(token) + strlen(command) + 2);
+
+	if (full_path == NULL)
+	{
+		perror("error in malloc");
+		exit(EXIT_FAILURE);
+	}
+
+	strcpy(full_path, token);
+	strcat(full_path, "/");
+	strcat(full_path, command);
+
+	return (full_path);
+}
+/**
+ * execute_command - Execute the command using execvp.
+ * @comargs: An array to store the resulting tokens for execution.
+ * @full_path: The full path to the executable.
+ */
+static void execute_command(char **comargs, const char *full_path)
+{
+	comargs[0] = strdup(full_path);
+	if (comargs[0] == NULL)
+	{
+		perror("error in strdup");
+		exit(EXIT_FAILURE);
+	}
+
+	free(full_path);
+}
+/**
+ * search_in_path - Search for the executable in a specific PATH directory.
+ * @token: The current token from PATH.
+ * @command: The command to be executed.
+ * @comargs: An array to store the resulting tokens for execution.
+ * Return: 1 if the command was found and executed, 0 otherwise.
+ */
+static int search_in_path(const char *token,
+	       const char *command,
+	       char **comargs)
+{
+	char *full_path = construct_full_path(token, command);
+	struct stat file_stat;
+
+	if (stat(full_path, &file_stat) == 0 &&
+		S_ISREG(file_stat.st_mode) &&
+		(file_stat.st_mode & S_IXUSR))
+	{
+		execute_command(comargs, full_path);
+		return (1);
+	}
+
+	free(full_path);
+	return (0);
+}
+
+/**
+ * handle_path - Search for the executable in directories specified by PATH.
+ * @command: The command to be executed.
+ * @comargs: An array to store the resulting tokens for execution.
  */
 void handle_path(const char *command, char **comargs)
 {
-	/* Get the PATH environment variable*/
 	char *path = getenv("PATH");
-	
+
 	/*Check if PATH is not set*/
-	if (path == NULL) {
+	if (path == NULL)
+	{
 		letsprint("problem with the PATH environment .\n");
 		exit(EXIT_FAILURE);
 	}
 	/* Check if the command contains a '/'*/
-	
+
 	if (strchr(command, '/') != NULL)
 	{
 		/* Command contains a '/', execute it directly*/
@@ -30,39 +94,14 @@ void handle_path(const char *command, char **comargs)
 	{
 		/* Command does not contain a '/', search for it in the PATH*/
 		char *token = strtok(path, ":");
-		while (token != NULL) {
-            /* Construct the full path to the executable*/
-			char *full_path = malloc(strlen(token) + strlen(command) + 2);
-			if (full_path == NULL)
-			{
-				perror("error in malloc");
-				exit(EXIT_FAILURE);
-			}
-			/* Use letsprint for string concatenation*/
-			letsprint(full_path);
-			letsprint(token);
-			letsprint("/");
-			letsprint(command);
-			/* Check if the command is executable*/
-			if (access(full_path, X_OK) == 0)
-			{
-				/* Execute the command using execvp*/
-				comargs[0] = strdup(full_path);
-				if (comargs[0] == NULL)
-				{
-					perror("error in strdup");
-					exit(EXIT_FAILURE);
-				}
-				free(full_path);
+
+		while (token != NULL)
+		{
+			if (search_in_path(token, command, comargs))
 				return;
-			}
-			while (token != NULL)
-			{
-				free(full_path);
-				token = strtok(NULL, ":");
-			}
+
+			token = strtok(NULL, ":");
 		}
-		/*If the loop completes, the command was not found in PATH*/
 		letsprint("Command not found in PATH: ");
 		letsprint(command);
 		letsprint("\n");
