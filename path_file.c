@@ -117,7 +117,7 @@ void handle_path(const char *command, char **comargs)
 		exit(EXIT_FAILURE);
 	}
 
-	snprintf(new_path, sizeof(new_path), "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:%s", path);
+	snprintf(new_path, sizeof(new_path), "%s:/bin/ls", path);
 	setenv("PATH", new_path, 1);
 	/* Check if the command contains a '/'*/
 
