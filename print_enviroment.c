@@ -2,7 +2,7 @@
 #include <sys/wait.h>
 /**
  * env_print - print environment variable
- * @envp: environment variables
+ * @env: environment variables
  */
 void env_print(char *env[])
 {
@@ -16,5 +16,4 @@ void env_print(char *env[])
 	{
 		wait(NULL);
 	}
-
 }

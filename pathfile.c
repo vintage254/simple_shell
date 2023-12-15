@@ -1,4 +1,6 @@
 #include "shell.h"
+#include <stdlib.h>
+
 /**
  * pathbuff - fills path buff
  * @pathbuffer: a buffer to store the path
@@ -6,17 +8,19 @@
  * @command: a command
  * Return: 1 (successful) or 0(fail)
  */
+
 void pathbuff(char *pathbuffer, char *path, char *command)
 {
 	char *t = pathbuffer;
-	/*copy path to pathbuffer*/
+
 	while (*path)
 	{
 		*t = *path;
 		t++;
 		path++;
 	}
-	*t = '/'; /*add a / to pathbuff*/
+
+	*t = '/';
 
 	t++;
 	/*concatenate command to t*/
@@ -26,20 +30,20 @@ void pathbuff(char *pathbuffer, char *path, char *command)
 		command++;
 		t++;
 	}
-	*t = '\0'; /*null terminate path_buff*/
+	*t = '\0';
 }
 
 /**
- * __fillpath - fills path buff
- * @_path_buff: a buffer to store the path
+ * fillpath - fills path buff
+ * @path_buff: a buffer to store the path
  * @path: a path
- * @cmd: a command
+ * @command: a command
  * Return: 1 (successful) or 0(fail)
  */
-int __fillpath(char *_path_buff, char *path, char *command)
+int fillpath(char *path_buff, char *path, char *command)
 {
-	if (_path_buff != NULL)
-		__fillpath(_path_buff, path, command);
+	if (path_buff != NULL)
+		pathbuff(path_buff, path, command);
 	else
 		return (0);
 	return (1);
@@ -48,7 +52,7 @@ int __fillpath(char *_path_buff, char *path, char *command)
 /**
  * relativepath - check if args[0] is a relative path
  * @arg: array of tokens
- * Return: 1 (true) / 0 (false)
+ * Return: 1 (true) and 0 (false)
 */
 int relativepath(char **arg)
 {
@@ -67,15 +71,15 @@ int relativepath(char **arg)
  */
 char *findpath(char *string)
 {
-	char *path_t, _copy[1024], *path, *pathbuffer, *command;
+	char *path_t, copy[1024], *path, *pathbuffer, *command;
 	int get_path = 0;
 
 	command = token_s(string, " ");
 	path_t = getenv("PATH");
 	if (path_t == NULL)
 		return (NULL);
-	move(_copy, path_t);
-	path = token_s(_copy, ":");
+	move(copy, path_t);
+	path = token_s(copy, ":");
 	if (command == NULL)
 		return (NULL);
 	if (*string != '/')
@@ -85,14 +89,14 @@ char *findpath(char *string)
 			pathbuffer = malloc(BUFFSIZE * sizeof(char));
 			if (pathbuff(pathbuff, path, command) == 0)
 				return (NULL);
-			if (access(_path_buff, X_OK) == 0)
+			if (access(path_buff, X_OK) == 0)
 			{
 				get_path = 1;
 				break;
 			}
 			else
 			{
-				free(_path_buff);
+				free(path_buff);
 			}
 			path = token_s(NULL, ":");
 		}
@@ -104,9 +108,9 @@ char *findpath(char *string)
 	else
 	{
 		pathbuff = malloc(sizeof(char) * (lengthstr(string) + 2 + lengthstr(path)));
-		move(_path_buff, command);
+		move(path_buff, command);
 	}
-	return (_path_buff);
+	return (path_buff);
 }
 
 /**
@@ -157,7 +161,7 @@ int getpath(char **arg, int c, char *argv)
 
 		if (invalidpath(arg) == 127)
 
-		if (invalidpath(args) == 127)
+		if (invalidpath(arg) == 127)
 			return (127);
 	}
 	return (0);

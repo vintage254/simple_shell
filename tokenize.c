@@ -8,7 +8,7 @@
  */
 char *token_s(char *string, char *delmtr)
 {
-	static char *_string;
+	static char *_string = NULL;
 	char *tocken = NULL;
 	char *_delmtr = NULL;
 

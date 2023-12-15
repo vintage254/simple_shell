@@ -22,15 +22,16 @@ void letsprint(const char *displaying);
 int getpath(char **arg, int c, char *argv);
 char *findpath(char *string);
 void pathbuff(char *pathbuffer, char *path, char *command);
-int _stringcmp(const char *string1, const char *string2);
+int stringcmp(const char *string1, const char *string2);
+static int no_of_tokens(const char *input_string);
+static char **tokenize(const char *input_string, int token_no);
 int invalidpath(char **arg);
 void freeTokens(char **tocken);
 char **tokenizermspace(char *input_string);
-size_t lengthstr(const char *string);
-int __fillpath(char *_path_buff, char *path, char *command);
+int fillpath(char *path_buff, char *path, char *command);
 void pathbuff(char *pathbuffer, char *path, char *command);
-char **tokenize(const char *provided, int token_no);
-int no_of_tokens(const char *provided);
+char **tokenize(const char *input_string, int token_no);
+int no_of_tokens(const char *input_string);
 void _print(char *display);
 void move(char *destination, char *source);
 char *stringcopy(char *destination, char *strc);
@@ -39,5 +40,6 @@ char *strngocc(const char *string, const char *checkchar);
 char *token_s(char *string, char *delmtr);
 char *termi_null(char *input_string);
 int char_check(char *input_string, char *env[], int c, char *argv);
+void env_print(char *env[]);
 
 #endif /*SHELL_H*/
