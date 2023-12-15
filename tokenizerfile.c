@@ -68,12 +68,12 @@ static char **tokenize(const char *provided, int token_no)
 				return (NULL);
 			}
 
-			strncpy(tokens[index], start, t_Length);
+			strncpy(token_s[index], start, t_Length);
 			tocken[index++][t_Length] = '\0';
 		}
 	}
 
-	tockens[index] = NULL;
+	tocken[index] = NULL;
 	return (tockens);
 }
 
@@ -85,16 +85,16 @@ static char **tokenize(const char *provided, int token_no)
  */
 char **tokenizermspace(char *input)
 {
-	int tcount = count_tokens(input);
+	int tcount = no_of_tokens(input);
 	char **tokens;
 
-		if (tcount == 0)
+	if (tcount == 0)
 	{
 		free(input);
 		return (NULL);
 	}
 
-	tocken = tokenize(input, tcount);
+	tokens = tokenize(input, tcount);
 
 	free(input);
 	return (tocken);

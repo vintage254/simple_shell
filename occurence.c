@@ -17,7 +17,7 @@ char *strngocc(const char *string, const char *checkchar)
 
 		while (*curr_char != '\0')
 		{
-			if (*str == *curr_char)
+			if (*string == *curr_char)
 				return ((char *)string);
 			curr_char++;
 		}

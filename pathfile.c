@@ -83,7 +83,7 @@ char *findpath(char *string)
 		while (path)
 		{
 			pathbuffer = malloc(BUFFSIZE * sizeof(char));
-			if (pathbuff(_path_buff, path, command) == 0)
+			if (pathbuff(pathbuff, path, command) == 0)
 				return (NULL);
 			if (access(_path_buff, X_OK) == 0)
 			{
@@ -103,7 +103,7 @@ char *findpath(char *string)
 	}
 	else
 	{
-		_path_buff = malloc(sizeof(char) * (_strlen(string) + 2 + _strlen(path)));
+		pathbuff = malloc(sizeof(char) * (lengthstr(string) + 2 + lengthstr(path)));
 		move(_path_buff, command);
 	}
 	return (_path_buff);
@@ -136,7 +136,8 @@ int getpath(char **arg, int c, char *argv)
 			fprintf(stderr, "%s: %d: %s: not found\n", argv, c, temp);
 			return (127);
 		}
-	} else if (arg[0][0] != '/')
+	}
+	else if (arg[0][0] != '/')
 	{
 		path = findpath(arg[0]);
 		if (p == NULL)
@@ -150,10 +151,11 @@ int getpath(char **arg, int c, char *argv)
 			free(arg[0]);
 			arg[0] = p;
 		}
-	} else
+	}
+	else
 	{
 
-		if (invalid_absolute_path(arg) == 127)
+		if (invalidpath(arg) == 127)
 
 		if (invalidpath(args) == 127)
 			return (127);
