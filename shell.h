@@ -11,8 +11,21 @@
 
 void letsprint(const char *message);
 void cshell(void);
-int main(void);
+void execute_command(char **arg, char *env[], int count, char *argv)
 void read_command(char *command, size_t size);
-void execute_command(const char*command);
+int main(int __attribute__((unused)) argh, char *argv[], char *env[]);
+
+int getpath(char **arg, int c, char *argv);
+char *findpath(char *string);
+int relativepath(char **arg);
+int __fillpath(char *_path_buff, char *path, char *command);
+void pathbuff(char *pathbuffer, char *path, char *command);
+
+int _stringcmp(const char *string1, const char *string2);
+int invalidpath(char **args);
+void freeTokens(char **tocken);
+char **tokenizermspace(char *input);
+static char **tokenize(const char *provided, int token_no);
+static int no_of_tokens(const char *provided);
 
 #endif
