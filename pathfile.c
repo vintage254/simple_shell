@@ -152,7 +152,10 @@ int getpath(char **arg, int c, char *argv)
 		}
 	} else
 	{
+
 		if (invalid_absolute_path(arg) == 127)
+
+		if (invalidpath(args) == 127)
 			return (127);
 	}
 	return (0);
