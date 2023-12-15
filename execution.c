@@ -91,7 +91,7 @@ int handle_builtin_commands(char **command, par_t *pars)
  *
  * @comargs: An array containing the command and its arguments.
  */
-void handle_path_and_execute(char *comargs[2])
+void handle_path_and_execute(char **comargs)
 {
 	/*handle path */
 	handle_path(comargs[0], comargs);
