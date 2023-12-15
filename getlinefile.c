@@ -36,8 +36,9 @@ ssize_t gline(char **lineptr, size_t *n, FILE *stream)
 		/* Resize buffer if needed*/
 		if (i >= *n - 1)
 		{
+			char *new_lineptr;
 			*n *= 2;  /* Double the buffer size*/
-			char *new_lineptr = realloc(*lineptr, *n);
+			*new_lineptr = realloc(*lineptr, *n);
 			if (new_lineptr == NULL)
 			{
 				perror("realloc");

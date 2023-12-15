@@ -47,11 +47,7 @@ int char_check(char *input_string, char *env[], int c, char *argh)
 	if (arg == NULL)
 		return (5);
 
-	if (_stringcmp(arg[0], "quit") == 0)
-
-	if (_stringcmp(args[0], "quit") == 0)
-
-	if (_stringcmp(arg[0], "quit") == 0)
+	if (stringcmp(arg[0], "quit") == 0)
 	{
 		freeTokens(arg);
 		return (-1);
@@ -64,7 +60,7 @@ int char_check(char *input_string, char *env[], int c, char *argh)
 	}
 
 	else
-		exit_s = execute_command(arg, env, c, argv);
+		exit_s = execute_command(arg, env, c, argh);
 
 	return (exit_s);
 }
