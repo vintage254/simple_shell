@@ -16,5 +16,4 @@ void env_print(char *env[])
 	{
 		wait(NULL);
 	}
-
 }

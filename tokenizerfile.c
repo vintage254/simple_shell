@@ -6,13 +6,13 @@
 
 /**
  * no_of_tokens - Helper function to count the number of tokens in a string
- * @provided: string
+ * @input_string: string
  * Return: number of tokens
  */
-static int no_of_tokens(const char *provided)
+static int no_of_tokens(const char *input_string)
 {
 	int token_no = 0;
-	const char *ptr = provided;
+	const char *ptr = input_string;
 
 	while (*ptr)
 	{
@@ -31,11 +31,11 @@ static int no_of_tokens(const char *provided)
 
 /**
  * tokenize -an helper function for tokenizing a string
- * @provided: string input
+ * @input_string: string input
  * @token_no: the number of tokens
  * Return: an array of tokenized strings
  */
-static char **tokenize(const char *provided, int token_no)
+static char **tokenize(const char *input_string, int token_no)
 {
 	const char *ptr = provided;
 	char **tocken;
@@ -49,7 +49,7 @@ static char **tokenize(const char *provided, int token_no)
 		return (NULL);
 	}
 
-	ptr = provided;
+	ptr = input_string;
 	while (*ptr)
 	{
 		while (isspace(*ptr))
@@ -74,30 +74,30 @@ static char **tokenize(const char *provided, int token_no)
 	}
 
 	tocken[index] = NULL;
-	return (tockens);
+	return (tocken);
 }
 
 /**
  * tokenizermspace - Function to tokenize a string and
  * remove spaces, tabs, and newlines
- * @input: string
+ * @input_string: string
  * Return: array of tokenized strings
  */
-char **tokenizermspace(char *input)
+char **tokenizermspace(char *input_string)
 {
-	int tcount = no_of_tokens(input);
+	int tcount = no_of_tokens(input_string);
 	char **tokens;
 
 	if (tcount == 0)
 	{
-		free(input);
+		free(input_string);
 		return (NULL);
 	}
 
-	tokens = tokenize(input, tcount);
+	tokens = tokenize(input_string, tcount);
 
-	free(input);
-	return (tocken);
+	free(input_string);
+	return (tokens);
 }
 
 /**

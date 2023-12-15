@@ -1,10 +1,11 @@
+#include <stdio.h>
+#include "shell.h"
 /**
  * strngocc - find the first occurence of a character in a string
  * @string: the string to search
  * @checkchar: a string of characters to check for
  * Return: pointer to first occurence
  */
-#include <stdio.h>
 
 char *strngocc(const char *string, const char *checkchar)
 {
