@@ -1,4 +1,6 @@
 #include "shell.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
  * token_s - for tockenizing the strings

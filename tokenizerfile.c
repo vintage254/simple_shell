@@ -30,14 +30,14 @@ static int no_of_tokens(const char *input_string)
 }
 
 /**
- * tokenize -an helper function for tokenizing a string
+ * tokenize - an helper function for tokenizing a string
  * @input_string: string input
  * @token_no: the number of tokens
  * Return: an array of tokenized strings
  */
 static char **tokenize(const char *input_string, int token_no)
 {
-	const char *ptr = provided;
+	const char *ptr = input_string;
 	char **tocken;
 	size_t t_Length;
 	const char *start;
