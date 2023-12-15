@@ -48,7 +48,7 @@ int char_check(char *input_string, char *env[], int c, char *argh)
 		return (5);
 
 
-	if (stringcmp(arg[0], "quit") == 0)
+	if (_stringcmp(arg[0], "quit") == 0)
 
 	if (_stringcmp(args[0], "quit") == 0)
 
