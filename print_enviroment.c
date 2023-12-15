@@ -1,5 +1,5 @@
 #include "shell.h"
-
+#include <sys/wait.h>
 /**
  * env_print - print environment variable
  * @envp: environment variables
