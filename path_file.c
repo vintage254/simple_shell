@@ -36,9 +36,6 @@ void execute_command(char **comargs)
 		perror("execvp failed");
 		exit(EXIT_FAILURE);
 	}
-
-	perror("execvp failed");
-	exit(EXIT_FAILURE);
 }
 /**
  * search_in_path - Search for the executable in a specific PATH directory.
@@ -113,4 +110,5 @@ void handle_path(const char *command, char **comargs)
 	}
 	/* Set the rest of the arguments to NULL*/
 	comargs[1] = NULL;
+	free(path);
 }

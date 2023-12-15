@@ -21,6 +21,7 @@ int prompt(char *input, par_t *pars)
 		if (execve(full_path, pars->argv, environ) == -1)
 		{
 			perror(input);
+			fprintf(stderr, "Error executing command: %s\n", full_path);
 			_exit(EXIT_FAILURE);
 		}
 	}
