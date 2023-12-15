@@ -14,6 +14,6 @@ char *stringcopy(char *destination, char *strc)
 	{
 		destination[i] = strc[i];
 	}
-		destination[i] = '\0';
+	destination[i] = '\0';
 	return (destination);
 }
