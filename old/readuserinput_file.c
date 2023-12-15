@@ -1,23 +1,17 @@
 #include "shell.h"
-/**
- * read_user_input - Reads user input from stdin
- * @user_input: Pointer to the buffer to store user input
- * @x: Size of the buffer
- */
-void read_user_input(char *user_input, size_t x)
+void read_command(char *command, size_t size)
 {
-	if (fgets(user_input, x, stdin) == NULL)
-	{
-		if (feof(stdin))
+	if (fgets(command, size, stdin) == NULL)
+	{if (feof (stdin))
 		{
 			letsprint("\n");
-			exit(EXIT_SUCCESS);
+			exit (EXIT_SUCCESS);
 		}
 		else
 		{
-			letsprint("error in stdin, \n");
-			exit(EXIT_FAILURE);
+			letsprint("error while reading input,\n");
+			exit (EXIT_FAILURE);
 		}
 	}
-	user_input[strcspn(user_input, "\n)")] = '\0';
+	command[strcspn(command,"\n")] = '\0';
 }
