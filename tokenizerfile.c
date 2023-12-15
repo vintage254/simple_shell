@@ -30,10 +30,10 @@ static int no_of_tokens(const char *provided)
 }
 
 /**
- * tokenize - Helper function to tokenize a string
- * @provided: string
- * @token_no: number of tokens
- * Return: array of tokenized strings
+ * tokenize -an helper function for tokenizing a string
+ * @provided: string input
+ * @token_no: the number of tokens
+ * Return: an array of tokenized strings
  */
 static char **tokenize(const char *provided, int token_no)
 {
@@ -74,7 +74,7 @@ static char **tokenize(const char *provided, int token_no)
 	}
 
 	tockens[index] = NULL;
-	return (tokens);
+	return (tockens);
 }
 
 /**

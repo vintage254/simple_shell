@@ -14,7 +14,7 @@ void pathbuff(char *pathbuffer, char *path, char *command)
 	{
 		*t = *path;
 		t++;
-		path+;
+		path++;
 	}
 	*t = '/'; /*add a / to pathbuff*/
 
@@ -39,7 +39,7 @@ void pathbuff(char *pathbuffer, char *path, char *command)
 int __fillpath(char *_path_buff, char *path, char *command)
 {
 	if (_path_buff != NULL)
-		_fillpath(_path_buff, path, command);
+		__fillpath(_path_buff, path, command);
 	else
 		return (0);
 	return (1);
@@ -138,7 +138,7 @@ int getpath(char **arg, int c, char *argv)
 		}
 	} else if (arg[0][0] != '/')
 	{
-		path = findpath(args[0]);
+		path = findpath(arg[0]);
 		if (p == NULL)
 		{
 			freeTokens(arg);
@@ -152,7 +152,7 @@ int getpath(char **arg, int c, char *argv)
 		}
 	} else
 	{
-		if (invalid_absolute_path(args) == 127)
+		if (invalid_absolute_path(arg) == 127)
 			return (127);
 	}
 	return (0);

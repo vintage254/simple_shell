@@ -14,28 +14,27 @@
 #include <stdbool.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#define BUFFSIZE 1064
-
+#define BUFFSIZE 1024
 
 void letsprint(const char *message);
 void cshell(void);
-void execute_command(char **arg, char *env[], int count, char *argv)
+void execute_command(char **arg, char *env[], int count, char *argv);
 void read_command(char *command, size_t size);
 int main(int __attribute__((unused)) argh, char *argv[], char *env[]);
 
 int getpath(char **arg, int c, char *argv);
 char *findpath(char *string);
 int relativepath(char **arg);
-int __fillpath(char *_path_buff, char *path, char *command);
 void pathbuff(char *pathbuffer, char *path, char *command);
 
 int _stringcmp(const char *string1, const char *string2);
-int invalidpath(char **args);
+int invalidpath(char **arg);
 void freeTokens(char **tocken);
 char **tokenizermspace(char *input);
 static char **tokenize(const char *provided, int token_no);
 static int no_of_tokens(const char *provided);
-
+int __fillpath(char *_path_buff, char *path, char *command);
+void pathbuff(char *pathbuffer, char *path, char *command);
 void _print(char *display);
 void move(char *destination, char *source);
 char *stringcopy(char *destination, char *strc);
@@ -44,6 +43,5 @@ char *strngocc(const char *string, const char *checkchar);
 char *token_s(char *string, char *delmtr);
 char *termi_null(char *input_string);
 int char_check(char *input_string, char *env[], int c, char *argh);
-
 
 #endif

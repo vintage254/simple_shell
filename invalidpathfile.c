@@ -4,7 +4,7 @@
  * @arg: array of tokens
  * Return: 127 (invalid) / 0 (valid)
 */
-int invalidpath(char **args)
+int invalidpath(char **arg)
 {
 	if (access(arg[0], X_OK) != 0)
 		return (127);

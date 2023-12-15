@@ -12,7 +12,7 @@ char *termi_null(char *input_string)
 	for (t = 0; input_string[t] != '\0'; t++)
 	{
 		if (input_string[t] == '\n')
-			input_string[i] = '\0';
+			input_string[t] = '\0';
 	}
 	return (input_string);
 }
@@ -32,7 +32,7 @@ int char_check(char *input_string, char *env[], int c, char *argh)
 	size_t sizes = 0;
 	char **arg = NULL;
 
-	c_chars = gline(&input_string, &sizes, stdin);
+	c_chars = getline(&input_string, &sizes, stdin);
 	if (c_chars == -1)
 	{
 		free(input_string);
@@ -42,20 +42,20 @@ int char_check(char *input_string, char *env[], int c, char *argh)
 	}
 
 	termi_null(input_string);
-	arg = tokenizermvspace(input_string);
+	arg = tokenizermspace(input_string);
 
 	if (arg == NULL)
 		return (5);
 
-	if (stringcmp(args[0], "quit") == 0)
+	if (stringcmp(arg[0], "quit") == 0)
 	{
 		freeTokens(arg);
 		return (-1);
 	}
 
-	else if (stringcmp(args[0], "environment") == 0)
+	else if (stringcmp(arg[0], "environment") == 0)
 	{
-		freeTokens(args);
+		freeTokens(arg);
 		env_print(env);
 	}
 
