@@ -44,8 +44,8 @@ typedef struct op
 } op_t;
 extern char **environ;
 
-void exec_prompt(const char *stringcommand, par_t *pars);
-void exec_child(const char *stringcommand, par_t *pars);
+void exec_prompt(const char *stringcommand);
+void exec_child(const char *stringcommand);
 void exec_parent(pid_t childprocess);
 void letsprint (const char *commandline);
 void letsprint_int(int num);
@@ -55,14 +55,9 @@ void read_user_input(char *user_input, size_t x);
 void tokens(const char *commandline, char ***args);
 void handle_path(const char *command, char **comargs);
 int validnumber(char *s);
-void forExit(par_t *pars);
+void forExit(void);
 void forEnv(void);
-ssize_t getline_func(char *user_input, size_t x);
-void tokens_(const char *commandline, char **args);
 char *construct_full_path(const char *token, const char *command);
-void setEnv(par_t *pars);
-void unsetEnv(par_t *pars);
-void cd(par_t *pars);
 void free_shell(par_t *shell);
 void replace_variables(char **args, const par_t *pars);
 void add_alias(par_t *pars, const char *name, const char *value);
@@ -70,7 +65,7 @@ void print_aliases(const par_t *pars);
 char *resolve_alias(const par_t *pars, const char *name);
 alias_t *find_alias(const par_t *pars, const char *name);
 void free_tokens(char **args);
-int handle_builtin_commands(char **comargs, par_t *pars);
+int handle_builtin_commands(char **comargs);
 void handle_path_and_execute(char **comargs);
 void execute_command(char **comargs);
 

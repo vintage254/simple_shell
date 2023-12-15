@@ -6,7 +6,7 @@
  * setEnv - Initialize a new environment variable or modify an existing one.
  * @pars: Parameters including the command line arguments.
  */
-void setEnv(par_t *pars)
+/*void setEnv(par_t *pars)
 {
 	if (pars->args[1] && pars->args[2])
 	{
@@ -19,13 +19,13 @@ void setEnv(par_t *pars)
 	{
 		fprintf(stderr, "Usage: setenv VARIABLE VALUE\n");
 	}
-}
+}*/
 
 /**
  * unsetEnv - Remove an environment variable.
  * @pars: Parameters including the command line arguments.
  */
-void unsetEnv(par_t *pars)
+/*void unsetEnv(par_t *pars)
 {
 	if (pars->args[1])
 	{
@@ -38,13 +38,13 @@ void unsetEnv(par_t *pars)
 	{
 		fprintf(stderr, "Usage: unsetenv VARIABLE\n");
 	}
-}
+}*/
 
 /**
  * cd - Changes the current directory of the process.
  * @pars: Parameters including the command line arguments.
  */
-void cd(par_t *pars)
+/*void cd(par_t *pars)
 {
 	if (pars->args[1])
 	{
@@ -74,4 +74,4 @@ void cd(par_t *pars)
 			}
 		}
 	}
-}
+}*/

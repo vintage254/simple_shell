@@ -6,9 +6,8 @@
 /**
  * exec_prompt - Executes a command in a forked child process using execve.
  * @stringcommand: The path to the executable file.
- * @pars: Parameters including the command line arguments.
  */
-void exec_prompt(const char *stringcommand, par_t *pars)
+void exec_prompt(const char *stringcommand)
 {
 	pid_t childprocess = fork();
 
@@ -19,7 +18,7 @@ void exec_prompt(const char *stringcommand, par_t *pars)
 	}
 	else if (childprocess == 0)
 	{
-		exec_child(stringcommand, pars);
+		exec_child(stringcommand);
 	}
 	else
 	{
@@ -31,7 +30,7 @@ void exec_prompt(const char *stringcommand, par_t *pars)
  * @stringcommand: The path to the executable file.
  * @pars: Parameters including the command line arguments.
  */
-void exec_child(const char *stringcommand, par_t *pars)
+void exec_child(const char *stringcommand)
 {
     /*Dynamically allocate memory for comargs*/
 	char *comargs[2];
@@ -40,7 +39,7 @@ void exec_child(const char *stringcommand, par_t *pars)
 	comargs[1] = NULL;
 
 	/* Handle the "exit" command separately */
-	if (handle_builtin_commands(comargs, pars) == 1)
+	if (handle_builtin_commands(comargs) == 1)
 	{
 		free(comargs[0]);
 		exit(EXIT_SUCCESS);
@@ -59,26 +58,16 @@ void exec_child(const char *stringcommand, par_t *pars)
  *
  * Return: 0 on success, -1 on failure.
  */
-int handle_builtin_commands(char **command, par_t *pars)
+int handle_builtin_commands(char **command)
 {
 	if (strcmp(command[0], "exit") == 0)
 	{
-		forExit(pars);
+		forExit();
 	}
-	/* Handle the "setenv" command */
-	else if (strcmp(command[0], "setenv") == 0)
+	/* Handle the "env" command */
+	else if (strcmp(command[0], "env") == 0)
 	{
-		setEnv(pars);
-	}
-	/* Handle the "unsetenv" command */
-	else if (strcmp(command[0], "unsetenv") == 0)
-	{
-		unsetEnv(pars);
-	}
-	/* Handle the "cd" command */
-	else if (strcmp(command[0], "cd") == 0)
-	{
-		cd(pars);
+		forEnv();
 	}
 	else
 	{

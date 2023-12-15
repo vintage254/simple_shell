@@ -48,7 +48,6 @@ int prompt(char *input, par_t *pars, const char *full_path)
 int main(void)
 {
 	char *input_buffer = NULL;
-	ssize_t chars_read;
 	char *full_path;
 
 	par_t pars;
@@ -64,14 +63,15 @@ int main(void)
 			perror("Error in malloc");
 			exit(EXIT_FAILURE);
 		}
-		chars_read = getline_func(input_buffer, BUFFER_SIZE);
+		fgets(input_buffer, BUFFER_SIZE, stdin);
 
-		if (chars_read == -1)
+		if (input_buffer == NULL || feof(stdin))
 		{
 			/* End of file reached (Ctrl+D), exit the shell*/
 			letsprint("\n");
 			break;
 		}
+
 		input_buffer[strcspn(input_buffer, "\n")] = '\0';
 
 		full_path = construct_full_path("/bin", input_buffer);
