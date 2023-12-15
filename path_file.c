@@ -9,9 +9,12 @@
  * @command: The command to be executed.
  * Return: The dynamically allocated full path.
  */
-static char *construct_full_path(const char *token, const char *command)
+char *construct_full_path(const char *token, const char *command)
 {
-	char *full_path = malloc(strlen(token) + strlen(command) + 2);
+	size_t token_len = strlen(token);
+	size_t command_len = strlen(command);
+
+	char *full_path = malloc(token_len + 1 + command_len + 1);
 
 	if (full_path == NULL)
 	{
@@ -22,6 +25,8 @@ static char *construct_full_path(const char *token, const char *command)
 	strcpy(full_path, token);
 	strcat(full_path, "/");
 	strcat(full_path, command);
+
+	printf("Constructed full path: %s\n", full_path);
 
 	return (full_path);
 }
@@ -51,18 +56,24 @@ static int search_in_path(const char *token,
 	       const char *command,
 	       char **comargs)
 {
-	char *full_path = construct_full_path(token, command);
+	char *full_path;
 	struct stat file_stat;
+
+	printf("Search path: %s\n", token);
+	full_path = construct_full_path(token, command);
+	printf("Full path: %s\n", full_path);
 
 	if (stat(full_path, &file_stat) == 0 &&
 		S_ISREG(file_stat.st_mode) &&
 		(file_stat.st_mode & S_IXUSR))
 	{
+		printf("Executable found and is executable\n");
 		execute_command(comargs);
 		free(full_path);
 		return (1);
 	}
 
+	printf("Executable not found or not executable\n");
 	free(full_path);
 	return (0);
 }
@@ -106,10 +117,12 @@ void handle_path(const char *command, char **comargs)
 
 			token = strtok(NULL, ":");
 		}
+
 		letsprint("Command not found in PATH: ");
 		letsprint(command);
 		letsprint("\n");
 		exit(EXIT_FAILURE);
+		
 	}
 	/* Set the rest of the arguments to NULL*/
 	comargs[1] = NULL;
