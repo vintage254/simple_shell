@@ -88,6 +88,7 @@ void handle_path_and_execute(char **comargs)
 	if (execve(comargs[0], comargs, environ) == -1)
 	{
 		perror("execve failed");
+		fprintf(stderr, "Error executing command: %s\n", comargs[0]);
 		free(comargs[0]);
 		exit(EXIT_FAILURE);
 	}
