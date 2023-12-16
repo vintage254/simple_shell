@@ -71,7 +71,7 @@ int relativepath(char **arg)
  */
 char *findpath(char *string)
 {
-	char *path_t, copy[1024], *path, *pathbuffer, *command;
+	char *path_t, copy[1024], *path, pathbuffer[BUFFSIZE], *command;
 	int get_path = 0;
 
 	command = token_s(string, " ");
@@ -86,17 +86,11 @@ char *findpath(char *string)
 	{
 		while (path)
 		{
-			pathbuffer = malloc(BUFFSIZE * sizeof(char));
-			if (pathbuff(pathbuff, path, command) == 0)
-				return (NULL);
-			if (access(path_buff, X_OK) == 0)
+			pathbuff(pathbuffer, path, command);
+			if (access(pathbuffer, X_OK) == 0)
 			{
 				get_path = 1;
 				break;
-			}
-			else
-			{
-				free(path_buff);
 			}
 			path = token_s(NULL, ":");
 		}
@@ -107,14 +101,13 @@ char *findpath(char *string)
 	}
 	else
 	{
-		pathbuff = malloc(sizeof(char) * (lengthstr(string) + 2 + lengthstr(path)));
-		move(path_buff, command);
+		(pathbuff(pathbuffer, path, command);
 	}
-	return (path_buff);
+	return strdup(pathbuffer);
 }
 
 /**
- * path_finder - find the path of a command
+ * getpath - find the path of a command
  * @arg: array of tokens
  * @c: number of times shell has run
  * @argv: name of the shell
@@ -143,7 +136,7 @@ int getpath(char **arg, int c, char *argv)
 	}
 	else if (arg[0][0] != '/')
 	{
-		path = findpath(arg[0]);
+		char *path = findpath(arg[0]);
 		if (p == NULL)
 		{
 			freeTokens(arg);
@@ -153,14 +146,11 @@ int getpath(char **arg, int c, char *argv)
 		else
 		{
 			free(arg[0]);
-			arg[0] = p;
+			arg[0] = path;
 		}
 	}
 	else
 	{
-
-		if (invalidpath(arg) == 127)
-
 		if (invalidpath(arg) == 127)
 			return (127);
 	}

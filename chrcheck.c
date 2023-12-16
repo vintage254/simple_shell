@@ -42,6 +42,7 @@ int char_check(char *input_string, char *env[], int c, char *argh)
 	}
 
 	termi_null(input_string);
+
 	arg = tokenizermspace(input_string);
 
 	if (arg == NULL)

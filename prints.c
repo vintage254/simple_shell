@@ -6,5 +6,5 @@
 */
 void letsprint(const char *displaying)
 {
-	write(1, displaying, lengthstr(displaying));
+	write(1, displaying, lengthstr(command));
 }

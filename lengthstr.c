@@ -4,7 +4,7 @@
  * @s: the pointer for s
  * Return: 0 success
  */
-int lengthstr(char *s)
+int lengthstr(const char *s)
 {
 	int t;
 	int scount = 0;

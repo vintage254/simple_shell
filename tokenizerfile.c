@@ -9,7 +9,7 @@
  * @input_string: string
  * Return: number of tokens
  */
-static int no_of_tokens(const char *input_string)
+int no_of_tokens(const char *input_string)
 {
 	int token_no = 0;
 	const char *ptr = input_string;
@@ -35,7 +35,7 @@ static int no_of_tokens(const char *input_string)
  * @token_no: the number of tokens
  * Return: an array of tokenized strings
  */
-static char **tokenize(const char *input_string, int token_no)
+char **tokenize(const char *input_string, int token_no)
 {
 	const char *ptr = input_string;
 	char **tocken;
