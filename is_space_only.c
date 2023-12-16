@@ -25,17 +25,17 @@ int is_spaces_only(const char *str)
  */
 char *handle_relative_path(char **arg, char *temp, int c, char *argv)
 {
-        char *p = realpath(arg[0], NULL);
+	char *p = realpath(arg[0], NULL);
 
-        if (p != NULL)
-        {
-                free(arg[0]);
-                arg[0] = p;
-        }
-        else
-        {
-                freeTokens(arg);
-                fprintf(stderr, "%s: %d: %s: not found\n", argv, c, temp);
-        }
-        return (p);
+	if (p != NULL)
+	{
+		free(arg[0]);
+		arg[0] = p;
+	}
+	else
+	{
+		freeTokens(arg);
+		fprintf(stderr, "%s: %d: %s: not found\n", argv, c, temp);
+	}
+	return (p);
 }

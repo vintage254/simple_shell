@@ -72,7 +72,6 @@ int char_check(char *input_string, char *env[], int c, char *argh)
 /**
  * handle_getline_error - Handles getline error
  * @input_string: Input string
- * @argh: The name of the shell
  */
 void handle_getline_error(char *input_string)
 {
