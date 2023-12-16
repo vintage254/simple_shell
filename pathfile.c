@@ -63,7 +63,6 @@ int relativepath(char **arg)
 
 	return (0);
 }
-
 /**
  * findpath - find the path of a command
  * @string: command
@@ -71,39 +70,34 @@ int relativepath(char **arg)
  */
 char *findpath(char *string)
 {
-	char *path_t, copy[1024], *path, pathbuffer[BUFFSIZE], *command;
+	char *path_t, copy[1024], *pathbuffer, *command, *path;
 	int get_path = 0;
-
+	
 	command = token_s(string, " ");
 	path_t = getenv("PATH");
 	if (path_t == NULL)
-		return (NULL);
+		return NULL;
+
 	move(copy, path_t);
-	path = token_s(copy, ":");
-	if (command == NULL)
-		return (NULL);
-	if (*string != '/')
+	pathbuffer = malloc(BUFFSIZE);
+	if (!pathbuffer)
 	{
-		while (path)
-		{
-			pathbuff(pathbuffer, path, command);
-			if (access(pathbuffer, X_OK) == 0)
-			{
-				get_path = 1;
-				break;
-			}
-			path = token_s(NULL, ":");
-		}
-		if (get_path != 1)
-		{
-			return (NULL);
-		}
+		free(command);
+		return NULL;
 	}
-	else
+	while ((path = token_s(copy, ":")))
 	{
 		pathbuff(pathbuffer, path, command);
+		if (access(pathbuffer, X_OK) == 0)
+		{
+			get_path = 1;
+			break;
+		}
 	}
-	return (strdup(pathbuffer));
+	free(command);
+	free(pathbuffer);
+	
+	return (get_path ? strdup(pathbuffer) : NULL);
 }
 
 /**
@@ -132,17 +126,14 @@ int getpath(char **arg, int c, char *argv)
 	{
 		char *path = findpath(arg[0]);
 
-		if (p == NULL)
+		if (path == NULL)
 		{
-			freeTokens(arg);
 			fprintf(stderr, "%s: %d: %s: not found\n", argv, c, temp);
 			return (127);
 		}
-		else
-		{
-			free(arg[0]);
-			arg[0] = path;
-		}
+
+		free(arg[0]);
+		arg[0] = path;
 	}
 	else
 	{

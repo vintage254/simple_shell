@@ -46,5 +46,6 @@ char *handle_relative_path(char **arg, char *temp, int c, char *argv);
 int char_check(char *input_string, char *env[], int c, char *argv);
 void env_print(char *env[]);
 int execute_command(char **arg, char *env[], int count, char *argv);
+char *handle_relative_path(char **arg, char *temp, int c, char *argv);
 
 #endif /*SHELL_H*/

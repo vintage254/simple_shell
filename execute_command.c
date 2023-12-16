@@ -13,19 +13,19 @@ int execute_command(char **arg, char *env[], int count, char *argv)
 	pid_t child_pid = fork();
 	int exit_status = 0;
 
-	if (getpath(arg, count, argv) == 127)
-	{
-		/* Handle failure (return 127)*/
-		return (127);
-	}
-
 	if (child_pid == -1)
+        {
+                perror("fork");
+                return (1);
+        }
+        else if (child_pid == 0)
 	{
-		perror("fork");
-		return (1);
-	}
-	else if (child_pid == 0)
-	{
+		if (getpath(arg, count, argv) == 127)
+		{
+			/* Handle failure (return 127)*/
+			freeTokens(arg);
+			return (127);
+		}
 		if (execve(arg[0], arg, env) == -1)
 		{
 			freeTokens(arg);

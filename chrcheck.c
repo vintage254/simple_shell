@@ -65,7 +65,6 @@ int char_check(char *input_string, char *env[], int c, char *argh)
 	else
 		exit_s = execute_command(arg, env, c, argh);
 
-	freeTokens(arg);
 	return (exit_s);
 }
 
