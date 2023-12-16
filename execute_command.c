@@ -12,14 +12,14 @@ int execute_command(char **arg, char *env[], int count, char *argv)
 {
 	pid_t child_pid = fork();
 	int exit_status = 0;
-	
+
 	if (getpath(arg, count, argv) == 127)
 	{
 		/* Handle failure (return 127)*/
 		return (127);
 	}
 
-	if(child_pid == -1)
+	if (child_pid == -1)
 	{
 		perror("fork");
 		return (1);
@@ -36,6 +36,7 @@ int execute_command(char **arg, char *env[], int count, char *argv)
 	else
 	{
 		int status;
+
 		waitpid(child_pid, &status, 0);
 		if (WIFEXITED(status))
 		{

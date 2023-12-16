@@ -1,7 +1,7 @@
 #include "shell.h"
 /**
  * move - copy source to destination
- * @buffer: destination buffer
+ * @destination: destination buffer
  * @source: source buffer
  */
 void move(char *destination, char *source)

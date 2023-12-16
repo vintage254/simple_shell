@@ -103,7 +103,7 @@ char *findpath(char *string)
 	{
 		pathbuff(pathbuffer, path, command);
 	}
-	return strdup(pathbuffer);
+	return (strdup(pathbuffer));
 }
 
 /**
@@ -137,6 +137,7 @@ int getpath(char **arg, int c, char *argv)
 	else if (arg[0][0] != '/')
 	{
 		char *path = findpath(arg[0]);
+
 		if (p == NULL)
 		{
 			freeTokens(arg);
@@ -154,5 +155,6 @@ int getpath(char **arg, int c, char *argv)
 		if (invalidpath(arg) == 127)
 			return (127);
 	}
+
 	return (0);
 }

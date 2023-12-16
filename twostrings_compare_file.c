@@ -1,5 +1,5 @@
 /**
- * _strcmp - compare two strings
+ * stringcmp - compare two strings
  * @string1: string
  * @string2: string
  * Return: 0 if both are same and 1 if they're not

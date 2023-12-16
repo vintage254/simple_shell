@@ -1,4 +1,12 @@
 #include"shell.h"
+/**
+ * main - Entry point of the shell program
+ * @argh: The number of command-line arguments (unused).
+ * @argv: An array of strings containing the command-line arguments.
+ * @env: An array of strings containing the environment variables.
+ *
+ * Return: 0 on successful execution of the shell program.
+ */
 int main(int __attribute__((unused)) argh, char *argv[], char *env[])
 {
 	char *provide = NULL;
