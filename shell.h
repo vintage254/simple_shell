@@ -15,9 +15,10 @@
 #include <stdbool.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <ctype.h>
 
 #define BUFFSIZE 1024
-
+int is_spaces_only(const char *str);
 void letsprint(const char *displaying);
 int getpath(char **arg, int c, char *argv);
 char *findpath(char *string);

@@ -43,6 +43,13 @@ int char_check(char *input_string, char *env[], int c, char *argh)
 
 	termi_null(input_string);
 
+	/* Check if the input string is only spaces*/
+	if (is_spaces_only(input_string))
+	{
+		free(input_string);
+		return 0;  /* Return success for spaces-only input*/
+	}
+
 	arg = tokenizermspace(input_string);
 
 	if (arg == NULL)
