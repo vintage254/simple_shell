@@ -118,27 +118,27 @@ int getpath(char **arg, int c, char *argv)
 		p = handle_relative_path(arg, temp, c, argv);
 		if (p == NULL)
 		{
-			fprintf(stderr, "%s: %d: %s: unaval\n", argv, c, temp);
+			fprintf(stderr, "%s: %d: %s: %s\n", argv, c, temp, strerror(errno));
 			return (127);
 		}
 	}
 	else if (arg[0][0] != '/')
 	{
-		char *path = findpath(arg[0]);
+		p = findpath(arg[0]);
 
-		if (path == NULL)
+		if (p == NULL)
 		{
 			fprintf(stderr, "%s: %d: %s: not found\n", argv, c, temp);
 			return (127);
 		}
-
-		free(arg[0]);
-		arg[0] = path;
 	}
 	else
 	{
 		if (invalidpath(arg) == 127)
 			return (127);
 	}
+	free(arg[0]);
+	arg[0] = p;
+
 	return (0);
 }

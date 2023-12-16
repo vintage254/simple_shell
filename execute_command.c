@@ -14,11 +14,11 @@ int execute_command(char **arg, char *env[], int count, char *argv)
 	int exit_status = 0;
 
 	if (child_pid == -1)
-        {
-                perror("fork");
-                return (1);
-        }
-        else if (child_pid == 0)
+	{
+		perror("fork");
+		return (1);
+	}
+	else if (child_pid == 0)
 	{
 		if (getpath(arg, count, argv) == 127)
 		{
@@ -30,7 +30,7 @@ int execute_command(char **arg, char *env[], int count, char *argv)
 		{
 			freeTokens(arg);
 			perror("execve");
-			exit((errno == ENOENT ? 127 : errno));
+			exit((errno == ENOENT ? 127 : 126));
 		}
 	}
 	else
