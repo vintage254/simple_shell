@@ -121,18 +121,7 @@ int getpath(char **arg, int c, char *argv)
 	move(temp, arg[0]);
 	if (relativepath(arg))
 	{
-		p = realpath(arg[0], NULL);
-		if (p != NULL)
-		{
-			free(arg[0]);
-			arg[0] = p;
-		}
-		else
-		{
-			freeTokens(arg);
-			fprintf(stderr, "%s: %d: %s: not found\n", argv, c, temp);
-			return (127);
-		}
+		p = handle_relative_path(arg, temp, c, argv);
 	}
 	else if (arg[0][0] != '/')
 	{
@@ -155,6 +144,5 @@ int getpath(char **arg, int c, char *argv)
 		if (invalidpath(arg) == 127)
 			return (127);
 	}
-
 	return (0);
 }

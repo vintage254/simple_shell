@@ -10,7 +10,7 @@
  */
 char *token_s(char *string, char *delmtr)
 {
-	static char *_string = NULL;
+	static char *_string;
 	char *tocken = NULL;
 	char *_delmtr = NULL;
 
