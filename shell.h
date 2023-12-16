@@ -23,8 +23,8 @@ int getpath(char **arg, int c, char *argv);
 char *findpath(char *string);
 void pathbuff(char *pathbuffer, char *path, char *command);
 int stringcmp(const char *string1, const char *string2);
-static int no_of_tokens(const char *input_string);
-static char **tokenize(const char *input_string, int token_no);
+int no_of_tokens(const char *input_string);
+char **tokenize(const char *input_string, int token_no);
 int invalidpath(char **arg);
 void freeTokens(char **tocken);
 char **tokenizermspace(char *input_string);
@@ -44,6 +44,6 @@ void env_print(char *env[]);
 
 
 void env_print(char *env[]);
-void execute_command(char **arg, char *env[], int count, char *argv);
+int execute_command(char **arg, char *env[], int count, char *argv);
 
 #endif /*SHELL_H*/

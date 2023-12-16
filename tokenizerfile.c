@@ -9,7 +9,7 @@
  * @input_string: string
  * Return: number of tokens
  */
-static int no_of_tokens(const char *input_string)
+int no_of_tokens(const char *input_string)
 {
 	int token_no = 0;
 	const char *ptr = input_string;
@@ -35,9 +35,9 @@ static int no_of_tokens(const char *input_string)
  * @token_no: the number of tokens
  * Return: an array of tokenized strings
  */
-static char **tokenize(const char *input_string, int token_no)
+char **tokenize(const char *input_string, int token_no)
 {
-	const char *ptr = provided;
+	const char *ptr = input_string;
 	char **tocken;
 	size_t t_Length;
 	const char *start;
@@ -68,7 +68,7 @@ static char **tokenize(const char *input_string, int token_no)
 				return (NULL);
 			}
 
-			strncpy(token_s[index], start, t_Length);
+			strncpy(tocken[index], start, t_Length);
 			tocken[index++][t_Length] = '\0';
 		}
 	}
@@ -85,19 +85,19 @@ static char **tokenize(const char *input_string, int token_no)
  */
 char **tokenizermspace(char *input_string)
 {
-	int tcount = no_of_tokens(input_string);
-	char **tokens;
+	int token_no = no_of_tokens(input_string);
+	char **tocken;
 
-	if (tcount == 0)
+	if (token_no == 0)
 	{
 		free(input_string);
 		return (NULL);
 	}
 
-	tokens = tokenize(input_string, tcount);
+	tocken = tokenize(input_string, token_no);
 
 	free(input_string);
-	return (tokens);
+	return (tocken);
 }
 
 /**
