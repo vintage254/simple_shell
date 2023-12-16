@@ -13,7 +13,7 @@ int execute_command(char **arg, char *env[], int count, char *argv)
 	pid_t child_pid = fork();
 	int exit_status = 0;
 	
-	if (getpath(arg, c, argv) == 127)
+	if (getpath(arg, count, argv) == 127)
 	{
 		/* Handle failure (return 127)*/
 		return (127);

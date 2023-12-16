@@ -12,7 +12,7 @@ int main(int __attribute__((unused)) argh, char *argv[], char *env[])
 		{
 			c++;
 			letsprint("cisfun$ ");
-			struc = check_char(provide, env, c, argv[0]);
+			struc = char_check(provide, env, c, argv[0]);
 			if (struc != EOF && struc != 7)
 				exit_status = struc;
 			else if (struc == EOF)
@@ -24,7 +24,7 @@ int main(int __attribute__((unused)) argh, char *argv[], char *env[])
 		while (1)
 		{
 			c++;
-			struc = check_char(provide, env, c, argv[0]);
+			struc = char_check(provide, env, c, argv[0]);
 			if (struc != EOF && struc != 7)
 				exit_status = struc;
 			else if (struc == EOF)

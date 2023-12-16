@@ -101,7 +101,7 @@ char *findpath(char *string)
 	}
 	else
 	{
-		(pathbuff(pathbuffer, path, command);
+		pathbuff(pathbuffer, path, command);
 	}
 	return strdup(pathbuffer);
 }
@@ -115,7 +115,7 @@ char *findpath(char *string)
  */
 int getpath(char **arg, int c, char *argv)
 {
-	char *p;
+	char *p = NULL;
 	char temp[BUFFSIZE];
 
 	move(temp, arg[0]);
