@@ -118,7 +118,7 @@ int getpath(char **arg, int c, char *argv)
 		p = handle_relative_path(arg, temp, c, argv);
 		if (p == NULL)
 		{
-			fprintf(stderr, "%s: %d: %s: %s\n", argv, c, temp, strerror(errno));
+			fprintf(stderr, "%s: %d: %s\n", argv, c, strerror(errno));
 			return (127);
 		}
 	}

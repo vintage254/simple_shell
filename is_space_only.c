@@ -35,7 +35,14 @@ char *handle_relative_path(char **arg, char *temp, int c, char *argv)
 	else
 	{
 		freeTokens(arg);
-		fprintf(stderr, "%s: %d: %s: not found\n", argv, c, temp);
+		if (errno == ENOENT)
+		{
+			fprintf(stderr, "%s: %d: %s: not found\n", argv, c, temp);
+		}
+		else
+		{
+			perror("realpath");
+		}
 	}
 	return (p);
 }

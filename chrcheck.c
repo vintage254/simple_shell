@@ -7,14 +7,22 @@
 */
 char *termi_null(char *input_string)
 {
-	size_t t;
-
-	for (t = 0; input_string[t] != '\0'; t++)
+	size_t length = strlen(input_string);
+	char *result = malloc(length + 1);
+	size_t i;
+	
+	if (result == NULL)
 	{
-		if (input_string[t] == '\n')
-			input_string[t] = '\0';
+		/* Handle memory allocation error*/
+		perror("malloc");
+		exit(EXIT_FAILURE);
 	}
-	return (input_string);
+	for (i = 0; i < length; i++)
+	{
+		result[i] = (input_string[i] == '\n') ? '\0' : input_string[i];
+	}
+	result[length] = '\0';
+	return result;
 }
 
 /**
@@ -44,7 +52,6 @@ int char_check(char *input_string, char *env[], int c, char *argh)
 	/* Check if the input string is only spaces*/
 	if (is_spaces_only(input_string))
 	{
-		free(input_string);
 		return (0);  /* Return success for spaces-only input*/
 	}
 
@@ -63,8 +70,10 @@ int char_check(char *input_string, char *env[], int c, char *argh)
 		env_print(env);
 	}
 	else
+	{
 		exit_s = execute_command(arg, env, c, argh);
-
+	}
+	freeTokens(arg);
 	return (exit_s);
 }
 
