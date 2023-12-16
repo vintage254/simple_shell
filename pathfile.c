@@ -122,6 +122,11 @@ int getpath(char **arg, int c, char *argv)
 	if (relativepath(arg))
 	{
 		p = handle_relative_path(arg, temp, c, argv);
+		if (p == NULL)
+		{
+			fprintf(stderr, "%s: %d: %s: unaval\n", argv, c, temp);
+			return (127);
+		}
 	}
 	else if (arg[0][0] != '/')
 	{

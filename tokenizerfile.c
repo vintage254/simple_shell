@@ -108,6 +108,9 @@ void freeTokens(char **tocken)
 {
 	int i;
 
+	if (tocken == NULL)
+		return;
+
 	for (i = 0; tocken[i]; i++)
 		free(tocken[i]);
 	free(tocken);

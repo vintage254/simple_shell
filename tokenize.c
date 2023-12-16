@@ -17,11 +17,11 @@ char *token_s(char *string, char *delmtr)
 	if (string != NULL)
 		_string = string;
 
-	if (_string == NULL)
+	if (_string == NULL || *_string == '\0')
 		return (NULL);
 
 	tocken = _string;
-	_delmtr = token_s(_string, delmtr);
+	_delmtr = strngocc(_string, delmtr);
 
 	if (_delmtr != NULL)
 	{
