@@ -23,12 +23,10 @@ int execute_command(char **arg, char *env[], int count, char *argv)
 		if (getpath(arg, count, argv) == 127)
 		{
 			/* Handle failure (return 127)*/
-			freeTokens(arg);
-			return (127);
+			exit(127);
 		}
 		if (execve(arg[0], arg, env) == -1)
 		{
-			freeTokens(arg);
 			perror("execve");
 			exit((errno == ENOENT ? 127 : 126));
 		}
@@ -46,7 +44,7 @@ int execute_command(char **arg, char *env[], int count, char *argv)
 		{
 			exit_status = 1;
 		}
-		freeTokens(arg);
 	}
+	freeTokens(arg);
 	return (exit_status);
 }

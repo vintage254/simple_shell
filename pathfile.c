@@ -121,6 +121,7 @@ int getpath(char **arg, int c, char *argv)
 			fprintf(stderr, "%s: %d: %s\n", argv, c, strerror(errno));
 			return (127);
 		}
+		fprintf(stderr, "resolved path; %s\n", p);
 	}
 	else if (arg[0][0] != '/')
 	{
